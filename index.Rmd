@@ -43,7 +43,7 @@ sports_table <- sports |>
 sports_bar <- sports |>
   ggplot(aes(x = Party)) + 
   geom_bar(aes(fill = Party)) +
-  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
+  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Team Owners")
 
 sports_table
 sports_bar
@@ -77,7 +77,11 @@ sports |>
 sports |>
   ggplot(aes(x = League)) + 
   geom_bar(mapping = aes(fill = Party)) +
-  labs(x = "Sports Team League", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
+  labs(x = "Sports Team League", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Team Owners, By League")
 
 ```
-The above table and graph visualize the breakdown of political party donations by sports league, displaying the relationship between sports league and political leaning.
+The above table and graph visualize the breakdown of political party donations by sports league, displaying the relationship between sports league and political leaning. While there are a greater number of observations for owners of NFL teams, the graph uses a proportional distribution of party donations to illustrate the vast difference between NFL team owners and WNBA team owners. As can be seen here, the overwhelming majority of donations from owners of NFL teams go to Republican candidates. In stark contrast, the overwhelming majority of donations from owners of WNBA teams go to Democrat candidates. It can even be said that WNBA team owners donate to Democrat campaigns in greater proportions than NFL team owners donate to Republican campaigns, as given by the proportions seen in the graph. Even in the absence of any numerical values, the bar graph alone shows the huge proportional disparity between the two leagues. 
+
+##Conclusion
+
+Over 70% of all donations from owners of NFL teams went to Republican campaigns while nearly 80% of all donations from owners of WNBA teams went to Democrat campaigns. 
