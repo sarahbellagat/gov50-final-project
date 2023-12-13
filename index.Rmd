@@ -11,7 +11,11 @@ output:
 
 ## Introduction
 
-Do wealthy owners of teams in the National Football League lean more towards one political party? In this study, I plan on examining to what extent the wealthy owners of NFL teams are involved in the political sphere -- more specifically, whether they lean more Democrat or Republican and how this leaning is manifested with their political donations.  In the greater United States, Americans largely fall on either side of the political spectrum in equal proportions. In this research study, I attempt to discover if there is a relationship between these individuals' status as wealthy sports owners and political leaning. I hypothesize that these sports team owners largely lean Republican. The null hypothesis would be that there is no particular leaning -- or in other words, that sports team owners fall on either side of the political spectrum largely equally. Sports team owners are typically older men with large amounts of wealth -- a demographic that particularly votes Republican at much higher rates compared to other demographics. People of this socioeconomic status largely tend towards conservatism thanks to Republican policies that favor those of higher socioeconomic status -- for example, tax breaks for the wealthy. The "pro-business" stance that the Republican party has long stood by has garnered it the support of many wealthy figures; as such, I hypothesize that the case is much the same with wealthy NFL team owners. My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League. My explanatory variable is being an NFL owner or commissioner and my outcome variable is the party to which they donated.
+Do wealthy owners of sports teams -- namely in the National Football League and the Women’s National Basketball Association -- lean more towards one political party? In this study, I plan on examining the relationship between political leaning and the league to which the sports team belongs -- more specifically, whether these team owners lean more Democrat or Republican, and particularly if there is a difference between the leagues.
+
+I hypothesize that there is a relationship between sports league and political leaning. The null hypothesis would be that there is no difference in political leaning between owners of teams in the NFL and teams in the WNBA. While sports team owners are typically thought of as leaning Republican, thanks to much of them being part of a demographic (older wealthy men) that overwhelmingly votes Republican, I believe that the league to which their sports team belongs may be correlated with political leaning. The WNBA is oftentimes thought of as one of the most progressive sports leagues, not only due to it being the most prominent women’s sports league but also thanks to its continued vocal support of social justice causes. The NFL in comparison has been less vocal on social justice issues. Its embroilment with the Colin Kaepernick collusion scandal at the height of the Black Lives Matter movement only cemented the idea that the NFL is not a progressive league. As such, I come to my hypothesis that there is a relationship between league and political leaning -- particularly that WNBA sports team owners lean more Democratic while NFL team owners lean more Republican. In order to prove this hypothesis, I would need to see a consistent pattern of Democratic support from WNBA sports team owners and Republican support from NFL sports team owners.
+
+While some may dismiss the topic of politics in sports, preferring instead to proclaim that the two should remain wholly separate, there is an important intersection between the two. Sports team owners are wealthy individuals, and as we have seen so many times in politics, money talks. The agendas of the top 1% shape public policy that affects the lives of the bottom 99%, often detrimentally. Sports team owners factor into this number -- not simply as a monetary force, but also as a sociocultural force with the impact on popular culture that their teams leave. Not only is it important to understand where the money dictating our politics comes from, but I feel that it is a moral responsibility to 
 
 ## Data
 
@@ -19,22 +23,60 @@ Do wealthy owners of teams in the National Football League lean more towards one
 library(tidyverse)
 library(dplyr)
 library(broom)
+library(modelsummary)
 
 sports <- sports_political_donations |>
   filter(League == "NFL" | League == "WNBA") |>
-  filter(Party == "Democrat" | Party == "Republican")
+  filter(Party == "Democrat" | Party == "Republican") |>
+  mutate(league_count = if_else(League == "NFL", 1, 0)) |>
+  mutate(party_count = if_else(Party == "Republican", 1, 0))
 
+sports_table <- sports |>
+  group_by(Party) |>
+  summarize(n = n()) |>
+  knitr::kable()
+
+sports_bar <- sports |>
+  ggplot(aes(x = Party)) + 
+  geom_bar(aes(fill = Party)) +
+  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
+
+sports_table
+sports_bar
+  
+```
+My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League and the Women’s National Basketball Association. This brings the number of observations down from 2,798 to 622. This data was initially used to explore the political donation histories of sports team owners across all six major leagues, resulting int he claim that these wealthy sports team owners overwhelmingly donated to Republican campaigns. My exploration of the data falls in a similar vein, although it focuses more specifically on a comparison between political donations for owners of sports teams belonging to the NFL versus the WNBA. 
+
+The dataset came in a very usable format, so I first began with mutating my variables such that they could then be functional in a regression. My variables of interest in the dataset -- "League" and "Party" -- were initially of the data type "character". In order to use this data for a regression function, I mutated the variables to instead assign them numeric values. I assigned the variable "League"  to be "1" if the owner's sports team belonged to the NFL and "0" if the owner's sports team belonged to the WNBA. I did the same with the variable "Party", assigning "1" if the donation was to a Republican campaign and "0" if it was to a Democrat campaign. Though this mutation was not very relevant to my initial data visualization, it will later be pivotal in my regression.
+
+My explanatory variable is the league to which the owner’s sports team belongs -- either the NFL or the WNBA -- and my outcome variable is their political party leaning, as measured by the proportion of donations to each political party per league. As can be seen here, of the 622 total donations included in my sample, 320 of them were to Republican campaigns and 302 of them were to Democrat campaigns. Without accounting for the particular league in which the donor's sports team belongs to, there appears to be a relatively even split in the political leanings of owners of teams in the NFL and WNBA. This study is a cross-sectional one, with the data being entirely observational from the Federal Election Commission and OpenSecrets. This data was also gathered at a single point in time, thereby precluding this from being a before-and-after or differences-in-differences study.
+
+##Results
+
+```{r}
+sportsreg <- lm(league_count ~ party_count, data = sports)
+
+varnames <- c("(Intercept)" = "Intercept",
+              "party_count" = "Political Party Variable")
+
+modelsummary::modelsummary(sportsreg, statistic = "p.value",
+                           gof_map = c("nobs", "r.squared"),
+                           coef_map = varnames)
+
+```
+
+As can be seen here, 
+
+```{r}
 sports |>
-  group_by(Party, League) |>
+  group_by(League, Party) |>
   summarize(n = n()) |>
   knitr::kable()
 
 sports |>
   ggplot(aes(x = League)) + 
   geom_bar(mapping = aes(fill = Party)) +
-  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
+  labs(x = "Sports Team League", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
 
-
-  
 ```
-##Results
+
