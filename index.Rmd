@@ -9,6 +9,26 @@ output:
 
 
 
-## Project thoughts
+## Introduction
 
-What are the political leanings of owners of teams in the National Football League? In this study, I plan on examining to what extent the wealthy owners of NFL teams are involved in the political sphere -- more specifically, whether they lean more Democrat or Republican and how this leaning is manifested with their political donations. I hypothesize that these sports team owners largely lean Republican. Sports team owners are typically older men with large amounts of wealth -- a demographic that particularly votes Republican at much higher rates compared to other demographics. People of this socioeconomic status largely tend towards conservatism thanks to Republican policies that favor those of higher socioeconomic status -- for example, tax breaks for the wealthy. The "pro-business" stance that the Republican party has long stood by has garnered it the support of many wealthy figures; as such, I hypothesize that the case is much the same with wealthy NFL team owners.
+Do wealthy owners of teams in the National Football League lean more towards one political party? In this study, I plan on examining to what extent the wealthy owners of NFL teams are involved in the political sphere -- more specifically, whether they lean more Democrat or Republican and how this leaning is manifested with their political donations.  In the greater United States, Americans largely fall on either side of the political spectrum in equal proportions. In this research study, I attempt to discover if there is a relationship between these individuals' status as wealthy sports owners and political leaning. I hypothesize that these sports team owners largely lean Republican. The null hypothesis would be that there is no particular leaning -- or in other words, that sports team owners fall on either side of the political spectrum largely equally. Sports team owners are typically older men with large amounts of wealth -- a demographic that particularly votes Republican at much higher rates compared to other demographics. People of this socioeconomic status largely tend towards conservatism thanks to Republican policies that favor those of higher socioeconomic status -- for example, tax breaks for the wealthy. The "pro-business" stance that the Republican party has long stood by has garnered it the support of many wealthy figures; as such, I hypothesize that the case is much the same with wealthy NFL team owners. My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League. My explanatory variable is being an NFL owner or commissioner and my outcome variable is the party to which they donated.
+
+## Data
+
+```{r}
+sports_political_donations <- sports_political_donations |>
+  filter(League == "NFL") |>
+  filter(Party == "Democrat" | Party == "Republican")
+
+sports_political_donations |>
+  group_by(Party) |>
+  summarize(n = n()) |>
+  knitr::kable()
+
+sports_political_donations |>
+  ggplot(aes(x = Party)) + 
+  geom_bar(mapping = aes(fill = Party)) +
+  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL Owners and Commissioners")
+  
+```
+
