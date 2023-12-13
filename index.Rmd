@@ -16,19 +16,25 @@ Do wealthy owners of teams in the National Football League lean more towards one
 ## Data
 
 ```{r}
-sports_political_donations <- sports_political_donations |>
-  filter(League == "NFL") |>
+library(tidyverse)
+library(dplyr)
+library(broom)
+
+sports <- sports_political_donations |>
+  filter(League == "NFL" | League == "WNBA") |>
   filter(Party == "Democrat" | Party == "Republican")
 
-sports_political_donations |>
-  group_by(Party) |>
+sports |>
+  group_by(Party, League) |>
   summarize(n = n()) |>
   knitr::kable()
 
-sports_political_donations |>
-  ggplot(aes(x = Party)) + 
+sports |>
+  ggplot(aes(x = League)) + 
   geom_bar(mapping = aes(fill = Party)) +
-  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL Owners and Commissioners")
+  labs(x = "Political Party", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
+
+
   
 ```
 ##Results
