@@ -19,6 +19,10 @@ While some may dismiss the topic of politics in sports, preferring instead to pr
 
 ## Data
 
+My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League and the Women’s National Basketball Association. This brings the number of observations down from 2,798 to 622. This data was initially used to explore the political donation histories of sports team owners across all six major leagues, resulting int he claim that these wealthy sports team owners overwhelmingly donated to Republican campaigns. My exploration of the data falls in a similar vein, although it focuses more specifically on a comparison between political donations for owners of sports teams belonging to the NFL versus the WNBA. 
+
+The dataset came in a very usable format, so I first began with mutating my variables such that they could then be functional in a regression. My variables of interest in the dataset -- "League" and "Party" -- were initially of the data type "character". In order to use this data for a regression function, I mutated the variables to instead assign them numeric values. I assigned the variable "League"  to be "1" if the owner's sports team belonged to the NFL and "0" if the owner's sports team belonged to the WNBA. I did the same with the variable "Party", assigning "1" if the donation was to a Republican campaign and "0" if it was to a Democrat campaign. Thus, upon calculation, values closer to 0 will be associated with a Democrat lean while values closer to 1 will be associated with a Republican lean. Though this mutation was not very relevant to my initial data visualization, it will later be pivotal in my regression.
+
 ```{r}
 library(tidyverse)
 library(dplyr)
@@ -45,9 +49,6 @@ sports_table
 sports_bar
   
 ```
-My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League and the Women’s National Basketball Association. This brings the number of observations down from 2,798 to 622. This data was initially used to explore the political donation histories of sports team owners across all six major leagues, resulting int he claim that these wealthy sports team owners overwhelmingly donated to Republican campaigns. My exploration of the data falls in a similar vein, although it focuses more specifically on a comparison between political donations for owners of sports teams belonging to the NFL versus the WNBA. 
-
-The dataset came in a very usable format, so I first began with mutating my variables such that they could then be functional in a regression. My variables of interest in the dataset -- "League" and "Party" -- were initially of the data type "character". In order to use this data for a regression function, I mutated the variables to instead assign them numeric values. I assigned the variable "League"  to be "1" if the owner's sports team belonged to the NFL and "0" if the owner's sports team belonged to the WNBA. I did the same with the variable "Party", assigning "1" if the donation was to a Republican campaign and "0" if it was to a Democrat campaign. Though this mutation was not very relevant to my initial data visualization, it will later be pivotal in my regression.
 
 My explanatory variable is the league to which the owner’s sports team belongs -- either the NFL or the WNBA -- and my outcome variable is their political party leaning, as measured by the proportion of donations to each political party per league. As can be seen here, of the 622 total donations included in my sample, 320 of them were to Republican campaigns and 302 of them were to Democrat campaigns. Without accounting for the particular league in which the donor's sports team belongs to, there appears to be a relatively even split in the political leanings of owners of teams in the NFL and WNBA. This study is a cross-sectional one, with the data being entirely observational from the Federal Election Commission and OpenSecrets. This data was also gathered at a single point in time, thereby precluding this from being a before-and-after or differences-in-differences study.
 
@@ -60,12 +61,12 @@ varnames <- c("(Intercept)" = "Intercept",
               "party_count" = "Political Party Variable")
 
 modelsummary::modelsummary(sportsreg, statistic = "p.value",
-                           gof_map = c("nobs", "r.squared"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"),
                            coef_map = varnames)
 
 ```
 
-As can be seen here, 
+As can be seen in the table, the regression produced an intercept of 0.305 and a coefficient of 0.527 for the political party variable. The intercept of 0.305 means that, among owners of sports teams in the WNBA, as the WNBA was given the numeric value of "0", the average value of their Political Party Variable is 0.305. In the context of this study, this means that owners of sports teams in the WNBA lean Democrat, as the two political parties were assigned numeric values -- 1 for Republican and 0 for Democrat. This intercept of 0.305 being closer to 0 is thus associated with a Democrat lean for WNBA sports team owners. The coefficient of 0.527 associated with the Political Party Variable also represents the slope of the regression. For every one-unit increase in the "League" variable, there is a 52.7% increase in the Political Party Variable. In the context of this study, a one-unit increase in the "League" variable indicates a change from WNBA sports team owners to NFL sports team owners. The increase in the Political Party Variable also indicates a shift towards a Republican lean. Thus, this coefficient would mean that owners of sports teams in the NFL exhibit a 52.7% shift towards a Republican lean compared to owners of sports teams in the WNBA. This regression produces a p-value that is less than 0.001, and when compared to an alpha of 0.05, indicates statistical significance.
 
 ```{r}
 sports |>
@@ -79,4 +80,4 @@ sports |>
   labs(x = "Sports Team League", y = "Number of Donors", title = "Donations to Political Parties from NFL and WNBA Owners")
 
 ```
-
+The above table and graph visualize the breakdown of political party donations by sports league, displaying the relationship between sports league and political leaning.
