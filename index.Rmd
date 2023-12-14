@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Sarah Bellagat"
-description: "An Analysis of Sports Team Ownership and Political Donations"
+description: "An Analysis of Sports Leagues and Political Donations"
 output:
   distill::distill_article:
     self_contained: false
