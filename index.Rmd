@@ -29,6 +29,8 @@ library(dplyr)
 library(broom)
 library(modelsummary)
 
+sports_political_donations <- read_csv("sports-political-donations.csv")
+
 sports <- sports_political_donations |>
   filter(League == "NFL" | League == "WNBA") |>
   filter(Party == "Democrat" | Party == "Republican") |>
@@ -52,7 +54,7 @@ sports_bar
 
 My explanatory variable is the league to which the owner’s sports team belongs -- either the NFL or the WNBA -- and my outcome variable is their political party leaning, as measured by the proportion of donations to each political party per league. As can be seen here, of the 622 total donations included in my sample, 320 of them were to Republican campaigns and 302 of them were to Democrat campaigns. Without accounting for the particular league in which the donor's sports team belongs to, there appears to be a relatively even split in the political leanings of owners of teams in the NFL and WNBA. This study is a cross-sectional one, with the data being entirely observational from the Federal Election Commission and OpenSecrets. This data was also gathered at a single point in time, thereby precluding this from being a before-and-after or differences-in-differences study.
 
-##Results
+## Results
 
 ```{r}
 sportsreg <- lm(league_count ~ party_count, data = sports)
@@ -82,11 +84,11 @@ sports |>
 ```
 The above table and graph visualize the breakdown of political party donations by sports league, displaying the relationship between sports league and political leaning. While there are a greater number of observations for owners of NFL teams, the graph uses a proportional distribution of party donations to illustrate the vast difference between NFL team owners and WNBA team owners. As can be seen here, the overwhelming majority of donations from owners of NFL teams go to Republican candidates. In stark contrast, the overwhelming majority of donations from owners of WNBA teams go to Democrat candidates. It can even be said that WNBA team owners donate to Democrat campaigns in greater proportions than NFL team owners donate to Republican campaigns, as given by the proportions seen in the graph. Even in the absence of any numerical values, the bar graph alone shows the huge proportional disparity between the two leagues. 
 
-##Conclusion
+## Conclusion
 
 In conclusion, there does appear to be a relationship between sports league ownership and political leaning, which would support a rejection of the null hypothesis of no relationship. Results from the analysis show an intercept of 0.305, indicating that owners of sports teams in the WNBA have an average political party value associated with a Democrat lean. In addition, the coefficient of 0.527 indicates that owners of sports teams in the NFL exhibit a 52.7% shift, associated with a shift to a Republican lean. Further visualizations show that 70% of all donations from owners of NFL teams went to Republican campaigns while nearly 80% of all donations from owners of WNBA teams went to Democrat campaigns. These results  rather clearly show a distinct relationship between sports league ownership and political leaning -- more specifically, associations between (a) WNBA team ownership and Democrat leanings and (b) NFL team ownership and Republican leanings. Given the statistical significance, these results support my hypothesis of there being a relationship between sports league ownership and political leaning. However, there do exist limitations with the study. Perhaps the most pertinent limitation is time -- my study did not take into consideration the donations over time, which could potentially complicate the results found in my study. In addition, the study is limited in scope from only comparing two leagues, the NFL and the WNBA, as opposed to comparing all six major leagues. The presence of third-party donations would add another layer of complexity that was not detailed in this specific study. With more time/money, I would improve my analysis by building upon these limitations and exploring them in depth. For example, perhaps the first expansion of this study that I would undertake would be to switch my design from cross-sectional to a design that takes into account change over time; of particular interest would be analyzing donation proportions pre- and post-2016 election. It would also be nice to expand this analysis to include all six major leagues, also accounting for change over time.
 
-##Works Cited
+## Works Cited
 
 Connley, Courtney. "Natasha Cloud, Breanna Stewart and other WNBA stars on continuing the fight for social justice and equality." CNBC, 18 March 2021, https://www.cnbc.com/2021/03/18/wnba-stars-continue-to-lead-charge-for-social-justice-and-equality.html.
 

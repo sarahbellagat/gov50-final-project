@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","sports-political-donations.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1473,6 +1473,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="index_files/header-attrs-2.25/header-attrs.js"></script>
+  <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1517,8 +1519,241 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>What are the political leanings of owners of teams in the National Football League? In this study, I plan on examining to what extent the wealthy owners of NFL teams are involved in the political sphere – more specifically, whether they lean more Democrat or Republican and how this leaning is manifested with their political donations. I hypothesize that these sports team owners largely lean Republican. Sports team owners are typically older men with large amounts of wealth – a demographic that particularly votes Republican at much higher rates compared to other demographics. People of this socioeconomic status largely tend towards conservatism thanks to Republican policies that favor those of higher socioeconomic status – for example, tax breaks for the wealthy. The “pro-business” stance that the Republican party has long stood by has garnered it the support of many wealthy figures; as such, I hypothesize that the case is much the same with wealthy NFL team owners.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Do wealthy owners of sports teams – namely in the National Football League and the Women’s National Basketball Association – lean more towards one political party? In this study, I plan on examining the relationship between political leaning and the league to which the sports team belongs – more specifically, whether these team owners lean more Democrat or Republican, and particularly if there is a difference between the leagues.</p>
+<p>I hypothesize that there is a relationship between sports league ownership and political leaning. The null hypothesis would be that there is no difference in political leaning between owners of teams in the NFL and teams in the WNBA, thereby meaning no relationship. While sports team owners are typically thought of as leaning Republican, thanks to much of them being part of a demographic (older wealthy men) that overwhelmingly votes Republican, I believe that the league to which their sports team belongs may be correlated with political leaning. The WNBA is oftentimes thought of as one of the most progressive sports leagues, not only due to it being the most prominent women’s sports league but also thanks to its continued vocal support of social justice causes. The NFL in comparison has been less vocal on social justice issues. Its embroilment with the Colin Kaepernick collusion scandal at the height of the Black Lives Matter movement only cemented the idea that the NFL is not a progressive league. As such, I come to my hypothesis that there is a relationship between league and political leaning – particularly that WNBA sports team owners lean more Democratic while NFL team owners lean more Republican. In order to prove this hypothesis, I would need to see a consistent pattern of Democratic support from WNBA sports team owners and Republican support from NFL sports team owners.</p>
+<p>While some may dismiss the topic of politics in sports, preferring instead to proclaim that the two should remain wholly separate, there is an important intersection between the two. Sports team owners are wealthy individuals, and as we have seen so many times in politics, money talks. The agendas of the top 1% shape public policy that affects the lives of the bottom 99%, often detrimentally. Sports team owners factor into this number – not simply as a monetary force, but also as a sociocultural force with the impact on popular culture that their teams leave. Not only is it important to understand where the money dictating our politics comes from, but I feel that it is a moral responsibility to</p>
+<h2 id="data">Data</h2>
+<p>My data includes every confirmed partisan political contribution from team owners and commissioners in the NFL, NBA, WNBA, NHL, MLB and NASCAR, although the sample I specifically am focusing on is partisan political contributions from team owners and commissioners in the National Football League and the Women’s National Basketball Association. This brings the number of observations down from 2,798 to 622. This data was initially used to explore the political donation histories of sports team owners across all six major leagues, resulting int he claim that these wealthy sports team owners overwhelmingly donated to Republican campaigns. My exploration of the data falls in a similar vein, although it focuses more specifically on a comparison between political donations for owners of sports teams belonging to the NFL versus the WNBA.</p>
+<p>The dataset came in a very usable format, so I first began with mutating my variables such that they could then be functional in a regression. My variables of interest in the dataset – “League” and “Party” – were initially of the data type “character”. In order to use this data for a regression function, I mutated the variables to instead assign them numeric values. I assigned the variable “League” to be “1” if the owner’s sports team belonged to the NFL and “0” if the owner’s sports team belonged to the WNBA. I did the same with the variable “Party”, assigning “1” if the donation was to a Republican campaign and “0” if it was to a Democrat campaign. Thus, upon calculation, values closer to 0 will be associated with a Democrat lean while values closer to 1 will be associated with a Republican lean. Though this mutation was not very relevant to my initial data visualization, it will later be pivotal in my regression.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://modelsummary.com'>modelsummary</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>sports_political_donations</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"sports-political-donations.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>sports</span> <span class='op'>&lt;-</span> <span class='va'>sports_political_donations</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>League</span> <span class='op'>==</span> <span class='st'>"NFL"</span> <span class='op'>|</span> <span class='va'>League</span> <span class='op'>==</span> <span class='st'>"WNBA"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Party</span> <span class='op'>==</span> <span class='st'>"Democrat"</span> <span class='op'>|</span> <span class='va'>Party</span> <span class='op'>==</span> <span class='st'>"Republican"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>league_count <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>League</span> <span class='op'>==</span> <span class='st'>"NFL"</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>party_count <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>Party</span> <span class='op'>==</span> <span class='st'>"Republican"</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>sports_table</span> <span class='op'>&lt;-</span> <span class='va'>sports</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Party</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>sports_bar</span> <span class='op'>&lt;-</span> <span class='va'>sports</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Party</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>Party</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Political Party"</span>, y <span class='op'>=</span> <span class='st'>"Number of Donors"</span>, title <span class='op'>=</span> <span class='st'>"Donations to Political Parties from NFL and WNBA Team Owners"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>sports_table</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Party
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Democrat
+</td>
+<td style="text-align:right;">
+302
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Republican
+</td>
+<td style="text-align:right;">
+320
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sports_bar</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<p>My explanatory variable is the league to which the owner’s sports team belongs – either the NFL or the WNBA – and my outcome variable is their political party leaning, as measured by the proportion of donations to each political party per league. As can be seen here, of the 622 total donations included in my sample, 320 of them were to Republican campaigns and 302 of them were to Democrat campaigns. Without accounting for the particular league in which the donor’s sports team belongs to, there appears to be a relatively even split in the political leanings of owners of teams in the NFL and WNBA. This study is a cross-sectional one, with the data being entirely observational from the Federal Election Commission and OpenSecrets. This data was also gathered at a single point in time, thereby precluding this from being a before-and-after or differences-in-differences study.</p>
+<p>##Results</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sportsreg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>league_count</span> <span class='op'>~</span> <span class='va'>party_count</span>, data <span class='op'>=</span> <span class='va'>sports</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>varnames</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>              <span class='st'>"party_count"</span> <span class='op'>=</span> <span class='st'>"Political Party Variable"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>sportsreg</span>, statistic <span class='op'>=</span> <span class='st'>"p.value"</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>varnames</span><span class='op'>)</span></span></code></pre>
+</div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Intercept
+</td>
+<td style="text-align:center;">
+0.305
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Party Variable
+</td>
+<td style="text-align:center;">
+0.527
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+(&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+622
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.284
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.282
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>As can be seen in the table, the regression produced an intercept of 0.305 and a coefficient of 0.527 for the political party variable. The intercept of 0.305 means that, among owners of sports teams in the WNBA, as the WNBA was given the numeric value of “0”, the average value of their Political Party Variable is 0.305. In the context of this study, this means that owners of sports teams in the WNBA lean Democrat, as the two political parties were assigned numeric values – 1 for Republican and 0 for Democrat. This intercept of 0.305 being closer to 0 is thus associated with a Democrat lean for WNBA sports team owners. The coefficient of 0.527 associated with the Political Party Variable also represents the slope of the regression. For every one-unit increase in the “League” variable, there is a 52.7% increase in the Political Party Variable. In the context of this study, a one-unit increase in the “League” variable indicates a change from WNBA sports team owners to NFL sports team owners. The increase in the Political Party Variable also indicates a shift towards a Republican lean. Thus, this coefficient would mean that owners of sports teams in the NFL exhibit a 52.7% shift towards a Republican lean compared to owners of sports teams in the WNBA. This regression produces a p-value that is less than 0.001, and when compared to an alpha of 0.05, indicates statistical significance.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sports</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>League</span>, <span class='va'>Party</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+League
+</th>
+<th style="text-align:left;">
+Party
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+NFL
+</td>
+<td style="text-align:left;">
+Democrat
+</td>
+<td style="text-align:right;">
+92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NFL
+</td>
+<td style="text-align:left;">
+Republican
+</td>
+<td style="text-align:right;">
+266
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WNBA
+</td>
+<td style="text-align:left;">
+Democrat
+</td>
+<td style="text-align:right;">
+210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WNBA
+</td>
+<td style="text-align:left;">
+Republican
+</td>
+<td style="text-align:right;">
+54
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>sports</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>League</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>Party</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sports Team League"</span>, y <span class='op'>=</span> <span class='st'>"Number of Donors"</span>, title <span class='op'>=</span> <span class='st'>"Donations to Political Parties from NFL and WNBA Team Owners, By League"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>The above table and graph visualize the breakdown of political party donations by sports league, displaying the relationship between sports league and political leaning. While there are a greater number of observations for owners of NFL teams, the graph uses a proportional distribution of party donations to illustrate the vast difference between NFL team owners and WNBA team owners. As can be seen here, the overwhelming majority of donations from owners of NFL teams go to Republican candidates. In stark contrast, the overwhelming majority of donations from owners of WNBA teams go to Democrat candidates. It can even be said that WNBA team owners donate to Democrat campaigns in greater proportions than NFL team owners donate to Republican campaigns, as given by the proportions seen in the graph. Even in the absence of any numerical values, the bar graph alone shows the huge proportional disparity between the two leagues.</p>
+<p>##Conclusion</p>
+<p>In conclusion, there does appear to be a relationship between sports league ownership and political leaning, which would support a rejection of the null hypothesis of no relationship. Results from the analysis show an intercept of 0.305, indicating that owners of sports teams in the WNBA have an average political party value associated with a Democrat lean. In addition, the coefficient of 0.527 indicates that owners of sports teams in the NFL exhibit a 52.7% shift, associated with a shift to a Republican lean. Further visualizations show that 70% of all donations from owners of NFL teams went to Republican campaigns while nearly 80% of all donations from owners of WNBA teams went to Democrat campaigns. These results rather clearly show a distinct relationship between sports league ownership and political leaning – more specifically, associations between (a) WNBA team ownership and Democrat leanings and (b) NFL team ownership and Republican leanings. Given the statistical significance, these results support my hypothesis of there being a relationship between sports league ownership and political leaning. However, there do exist limitations with the study. Perhaps the most pertinent limitation is time – my study did not take into consideration the donations over time, which could potentially complicate the results found in my study. In addition, the study is limited in scope from only comparing two leagues, the NFL and the WNBA, as opposed to comparing all six major leagues. The presence of third-party donations would add another layer of complexity that was not detailed in this specific study. With more time/money, I would improve my analysis by building upon these limitations and exploring them in depth. For example, perhaps the first expansion of this study that I would undertake would be to switch my design from cross-sectional to a design that takes into account change over time; of particular interest would be analyzing donation proportions pre- and post-2016 election. It would also be nice to expand this analysis to include all six major leagues, also accounting for change over time.</p>
+<p>##Works Cited</p>
+<p>Connley, Courtney. “Natasha Cloud, Breanna Stewart and other WNBA stars on continuing the fight for social justice and equality.” CNBC, 18 March 2021, <a href="https://www.cnbc.com/2021/03/18/wnba-stars-continue-to-lead-charge-for-social-justice-and-equality.html" class="uri">https://www.cnbc.com/2021/03/18/wnba-stars-continue-to-lead-charge-for-social-justice-and-equality.html</a>.</p>
+<p>FiveThirtyEight. (2020). [Data set]. <a href="https://github.com/fivethirtyeight/data/tree/master/sports-political-donations" class="uri">https://github.com/fivethirtyeight/data/tree/master/sports-political-donations</a>.</p>
+<p>“Inside The Political Donation History Of Wealthy Sports Owners.” FiveThirtyEight, 28 October 2020, <a href="https://fivethirtyeight.com/features/inside-the-political-donation-history-of-wealthy-sports-owners/" class="uri">https://fivethirtyeight.com/features/inside-the-political-donation-history-of-wealthy-sports-owners/</a>.</p>
+<p>Mangan, Dan. “Colin Kaepernick reaches settlement in national anthem kneeling collusion case against NFL.” CNBC, 15 February 2019, <a href="https://www.cnbc.com/2019/02/15/colin-kaepernick-reaches-settlement-in-collusion-case-against-nfl-lawyer-says.html" class="uri">https://www.cnbc.com/2019/02/15/colin-kaepernick-reaches-settlement-in-collusion-case-against-nfl-lawyer-says.html</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
